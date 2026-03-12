@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settla Bills — Never Pay a Late Fee Again</title>
+    <meta name="description" content="Track every bill on one screen, color-coded by urgency. Get reminded before due dates. Mark paid with one swipe. Free on the App Store.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #08090a;
+            --bg-raised: #111214;
+            --border: #222426;
+            --text: #e8e8e8;
+            --text-secondary: #7a7d82;
+            --accent: #00ff88;
+            --accent-dim: rgba(0, 255, 136, 0.08);
+            --accent-glow: rgba(0, 255, 136, 0.15);
+            --font: 'Space Grotesk', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 9, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .nav-logo:hover { opacity: 1; }
+
+        .nav-dot {
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); opacity: 1; }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 32px 80px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 8px 16px;
+            border-radius: 100px;
+            border: 1px solid rgba(0,255,136,0.15);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 72px);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            max-width: 720px;
+        }
+
+        .hero h1 .accent { color: var(--accent); }
+
+        .hero-sub {
+            font-size: clamp(17px, 2vw, 20px);
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--text);
+            color: var(--bg);
+            font-weight: 600;
+            font-size: 16px;
+            padding: 16px 32px;
+            border-radius: 100px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+        .hero-cta:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0,255,136,0.15);
+        }
+
+        .hero-cta svg { width: 20px; height: 20px; }
+
+        .hero-note {
+            margin-top: 16px;
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* --- PHONE MOCKUP --- */
+        .mockup-section {
+            padding: 0 32px 80px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-frame {
+            width: 280px;
+            height: 560px;
+            border-radius: 40px;
+            border: 2px solid var(--border);
+            background: var(--bg-raised);
+            padding: 16px;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 120px var(--accent-dim);
+        }
+
+        .phone-notch {
+            width: 120px;
+            height: 28px;
+            background: var(--bg);
+            border-radius: 0 0 16px 16px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+            background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen-header {
+            padding: 40px 20px 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .screen-summary {
+            padding: 0 20px 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .summary-pill {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .summary-pill .amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .summary-pill .label {
+            font-size: 9px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .screen-bills {
+            flex: 1;
+            padding: 0 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .mock-bill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .bill-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-red { background: #ff4444; }
+        .dot-yellow { background: #ffaa00; }
+        .dot-green { background: #00ff88; }
+
+        .bill-info { flex: 1; }
+        .bill-name { font-size: 13px; font-weight: 600; color: var(--text); }
+        .bill-due { font-size: 10px; color: var(--text-secondary); }
+        .bill-amount { font-size: 13px; font-weight: 600; color: var(--text); }
+
+        /* --- FEATURES --- */
+        .features {
+            padding: 80px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .features-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .features-title {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 56px;
+            line-height: 1.15;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            background: var(--bg-raised);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(0,255,136,0.2);
+            box-shadow: 0 0 40px var(--accent-dim);
+        }
+
+        .feature-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: var(--accent-dim);
+            border: 1px solid rgba(0,255,136,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* --- HOW IT WORKS --- */
+        .how-it-works {
+            padding: 80px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .how-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .how-title {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 56px;
+            line-height: 1.15;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+        }
+
+        .step-number {
+            font-family: var(--mono);
+            font-size: 48px;
+            font-weight: 700;
+            color: rgba(0,255,136,0.12);
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .step h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* --- PRICING --- */
+        .pricing {
+            padding: 80px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .pricing-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .pricing-title {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 56px;
+            line-height: 1.15;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 720px;
+        }
+
+        .pricing-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px;
+            background: var(--bg-raised);
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: rgba(0,255,136,0.3);
+            box-shadow: 0 0 60px var(--accent-dim);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Best Value';
+            position: absolute;
+            top: -12px;
+            right: 24px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--bg);
+            background: var(--accent);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .plan-name {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .plan-price {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .plan-period {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan-features li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+        }
+
+        .plan-features li::before {
+            content: '';
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: var(--accent-dim);
+            border: 1px solid rgba(0,255,136,0.2);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .plan-note {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* --- STAT BAR --- */
+        .stat-bar {
+            padding: 48px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* --- CTA --- */
+        .final-cta {
+            padding: 80px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .final-cta h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .final-cta p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 48px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .footer-info p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a {
+            font-size: 13px;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--text); opacity: 1; }
+
+        .footer-legal {
+            font-size: 12px;
+            color: #555;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .nav-links { gap: 16px; }
+            .hero { padding: 100px 20px 60px; min-height: 80vh; }
+            .features { padding: 64px 20px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .how-it-works { padding: 64px 20px; }
+            .steps { grid-template-columns: 1fr; gap: 32px; }
+            .pricing { padding: 64px 20px; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .stat-bar { grid-template-columns: 1fr; gap: 24px; padding: 40px 20px; }
+            .final-cta { padding: 64px 20px; }
+            footer { padding: 32px 20px; }
+            .footer-main { flex-direction: column; }
+            .phone-frame { width: 240px; height: 480px; }
+            .mockup-section { padding: 0 20px 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="nav-logo">
+            <span class="nav-dot"></span>
+            AppFactory Lab
+        </a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="https://apps.apple.com/app/id6760416459">Download</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <span class="hero-badge fade-up">Available on the App Store</span>
+        <h1 class="fade-up">Every bill.<br>One screen.<br><span class="accent">Zero late fees.</span></h1>
+        <p class="hero-sub fade-up">Settla Bills puts every bill you owe on a single color-coded dashboard. Red means act now. Green means you are safe. Get reminded before due dates. Mark paid with one swipe.</p>
+        <a href="https://apps.apple.com/app/id6760416459" class="hero-cta fade-up">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download Free
+        </a>
+        <p class="hero-note fade-up">Free for up to 5 bills. No account required.</p>
+    </section>
+
+    <div class="mockup-section fade-up">
+        <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+                <div class="screen-header">This Month</div>
+                <div class="screen-summary">
+                    <div class="summary-pill">
+                        <div class="amount">$847</div>
+                        <div class="label">Total Due</div>
+                    </div>
+                    <div class="summary-pill">
+                        <div class="amount">$312</div>
+                        <div class="label">Paid</div>
+                    </div>
+                </div>
+                <div class="screen-bills">
+                    <div class="mock-bill">
+                        <div class="bill-dot dot-red"></div>
+                        <div class="bill-info">
+                            <div class="bill-name">Rent</div>
+                            <div class="bill-due">Due today</div>
+                        </div>
+                        <div class="bill-amount">$1,200</div>
+                    </div>
+                    <div class="mock-bill">
+                        <div class="bill-dot dot-yellow"></div>
+                        <div class="bill-info">
+                            <div class="bill-name">Electric</div>
+                            <div class="bill-due">Due in 3 days</div>
+                        </div>
+                        <div class="bill-amount">$89</div>
+                    </div>
+                    <div class="mock-bill">
+                        <div class="bill-dot dot-green"></div>
+                        <div class="bill-info">
+                            <div class="bill-name">Internet</div>
+                            <div class="bill-due">Due in 12 days</div>
+                        </div>
+                        <div class="bill-amount">$65</div>
+                    </div>
+                    <div class="mock-bill">
+                        <div class="bill-dot dot-green"></div>
+                        <div class="bill-info">
+                            <div class="bill-name">Insurance</div>
+                            <div class="bill-due">Due in 18 days</div>
+                        </div>
+                        <div class="bill-amount">$142</div>
+                    </div>
+                    <div class="mock-bill">
+                        <div class="bill-dot dot-green"></div>
+                        <div class="bill-info">
+                            <div class="bill-name">Phone</div>
+                            <div class="bill-due">Due in 22 days</div>
+                        </div>
+                        <div class="bill-amount">$45</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="features" id="features">
+        <div class="features-label">Features</div>
+        <h2 class="features-title fade-up">Built for the way you actually pay bills</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-up">
+                <div class="feature-icon">$</div>
+                <h3>One-screen dashboard</h3>
+                <p>Every bill on a single screen, sorted by due date and color-coded by urgency. Red, yellow, green. You know what needs attention instantly.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon">&#x1F514;</div>
+                <h3>Smart reminders</h3>
+                <p>Push notifications before each bill is due. Choose 1 day, 2 days, or 1 week in advance. Customize per bill. Never hear "your payment is overdue" again.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon">&#x2705;</div>
+                <h3>Swipe to mark paid</h3>
+                <p>One swipe and the bill resets to next month automatically. Monthly, quarterly, or yearly recurrence. Your payment history is tracked over time.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon">&#x1F4CA;</div>
+                <h3>Monthly summary</h3>
+                <p>See total due, total paid, and what is left at a glance. Broken down by category so you know exactly where your money goes.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon">&#x1F512;</div>
+                <h3>Completely private</h3>
+                <p>All data stays on your device. No accounts, no bank linking, no cloud sync, no analytics. Your bills are your business.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon">&#x26A1;</div>
+                <h3>Add bills in seconds</h3>
+                <p>Name, amount, due date, category. That is all it takes. No 15-step setup, no connecting bank accounts, no spreadsheets. Just add and go.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="how-label">How It Works</div>
+        <h2 class="how-title fade-up">Three steps. That is the whole app.</h2>
+        <div class="steps">
+            <div class="step fade-up">
+                <div class="step-number">01</div>
+                <h3>Add your bills</h3>
+                <p>Enter the name, amount, and due date. Pick a category icon. Set when you want to be reminded. Done in under 10 seconds.</p>
+            </div>
+            <div class="step fade-up">
+                <div class="step-number">02</div>
+                <h3>Get reminded</h3>
+                <p>Settla Bills sends a push notification before each bill is due. You pick how early: 1 day, 2 days, or a full week.</p>
+            </div>
+            <div class="step fade-up">
+                <div class="step-number">03</div>
+                <h3>Swipe when paid</h3>
+                <p>Paid the bill? Swipe right. The due date resets for the next cycle automatically. Your payment history is saved.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="stat-bar fade-up">
+        <div>
+            <div class="stat-value">$12B+</div>
+            <div class="stat-desc">Late fees paid by Americans yearly</div>
+        </div>
+        <div>
+            <div class="stat-value">$32</div>
+            <div class="stat-desc">Average cost of a single late fee</div>
+        </div>
+        <div>
+            <div class="stat-value">$384</div>
+            <div class="stat-desc">Missing one bill per month costs you per year</div>
+        </div>
+    </div>
+
+    <section class="pricing" id="pricing">
+        <div class="pricing-label">Pricing</div>
+        <h2 class="pricing-title fade-up">Start free. Upgrade when you need more.</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card fade-up">
+                <div class="plan-name">Monthly</div>
+                <div class="plan-price">$3.99</div>
+                <div class="plan-period">per month</div>
+                <ul class="plan-features">
+                    <li>Unlimited bills</li>
+                    <li>Payment history</li>
+                    <li>Spending trends</li>
+                    <li>Custom notifications</li>
+                    <li>CSV export</li>
+                </ul>
+                <div class="plan-note">7-day free trial included</div>
+            </div>
+            <div class="pricing-card featured fade-up">
+                <div class="plan-name">Yearly</div>
+                <div class="plan-price">$29.99</div>
+                <div class="plan-period">per year</div>
+                <ul class="plan-features">
+                    <li>Everything in Monthly</li>
+                    <li>Save 37% vs. monthly</li>
+                    <li>Best for long-term savings</li>
+                    <li>Cancel anytime</li>
+                </ul>
+                <div class="plan-note">7-day free trial included</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta fade-up">
+        <h2>Stop paying for forgetting.</h2>
+        <p>Settla Bills pays for itself the first time it saves you from a late fee.</p>
+        <a href="https://apps.apple.com/app/id6760416459" class="hero-cta">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download Free on the App Store
+        </a>
+    </section>
+
+    <footer>
+        <div class="footer-main">
+            <div class="footer-info">
+                <p>&copy; 2026 AppFactory Lab</p>
+                <p><a href="mailto:support@appfactorylab.io">support@appfactorylab.io</a></p>
+            </div>
+            <div class="footer-links">
+                <a href="/privacy/settla-bills">Privacy Policy</a>
+                <a href="/terms/settla-bills">Terms of Use</a>
+                <a href="/support/settla-bills">Support</a>
+                <a href="/">AppFactory Lab</a>
+            </div>
+        </div>
+        <div class="footer-legal">
+            AppFactory Lab is an independent developer based in Israel. Apple, the Apple logo, iPhone, and App Store are trademarks of Apple Inc.
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

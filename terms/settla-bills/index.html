@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settla Bills — Terms of Use | AppFactory Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #08090a;
+            --bg-raised: #111214;
+            --border: #222426;
+            --text: #e8e8e8;
+            --text-secondary: #7a7d82;
+            --accent: #00ff88;
+            --accent-dim: rgba(0, 255, 136, 0.08);
+            --font: 'Space Grotesk', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+
+        header {
+            padding: 20px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .header-logo:hover { opacity: 1; }
+
+        .header-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .header-back {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .header-back:hover { color: var(--text); opacity: 1; }
+
+        .content {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 64px 32px 100px;
+        }
+
+        .page-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            line-height: 1.15;
+        }
+
+        .effective-date {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        h2:first-of-type { border-top: none; padding-top: 0; }
+
+        p { font-size: 16px; color: var(--text-secondary); margin-bottom: 16px; }
+
+        ul { padding-left: 0; list-style: none; margin-bottom: 16px; }
+
+        li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            padding: 8px 0 8px 20px;
+            position: relative;
+            border-bottom: 1px solid rgba(34, 36, 38, 0.5);
+        }
+
+        li:last-child { border-bottom: none; }
+
+        li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+        }
+
+        .contact-box {
+            background: var(--bg-raised);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-top: 48px;
+        }
+
+        .contact-box h2 {
+            border: none;
+            padding-top: 0;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .contact-box p { margin-bottom: 8px; }
+
+        .contact-email {
+            font-family: var(--mono);
+            font-size: 15px;
+        }
+
+        footer {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 32px 32px 48px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer p { font-size: 13px; color: var(--text-secondary); }
+
+        @media (max-width: 640px) {
+            header { padding: 16px 20px; }
+            .content { padding: 40px 20px 80px; }
+            footer { padding: 24px 20px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="header-logo">
+            <span class="header-dot"></span>
+            AppFactory Lab
+        </a>
+        <a href="/" class="header-back">Back to home</a>
+    </header>
+
+    <div class="content">
+        <div class="page-label">Terms of Use</div>
+        <h1>Settla Bills</h1>
+        <p class="effective-date">Effective date: March 12, 2026</p>
+
+        <p>These Terms of Use ("Terms") govern your use of Settla Bills ("the App"), developed and published by AppFactory Lab ("we", "us", "our"), based in Israel. By downloading, installing, or using the App, you agree to be bound by these Terms. If you do not agree, do not use the App.</p>
+
+        <h2>1. License</h2>
+        <p>We grant you a limited, non-exclusive, non-transferable, revocable license to use the App on any Apple device that you own or control, subject to these Terms and the Apple Media Services Terms and Conditions.</p>
+        <p>You may not copy, modify, distribute, sell, lease, sublicense, reverse engineer, or create derivative works based on the App.</p>
+
+        <h2>2. Description of Service</h2>
+        <p>Settla Bills is a bill tracking and reminder application. It allows you to record bill names, amounts, due dates, and set reminders. The App is a <strong>tracking tool only</strong> — it does not process payments, connect to bank accounts, or access any financial institutions.</p>
+        <p>All data you enter is stored locally on your device. We do not operate servers, databases, or cloud services for this App.</p>
+
+        <h2>3. Subscriptions &amp; In-App Purchases</h2>
+        <p>Settla Bills offers optional auto-renewable subscriptions ("Settla Bills Pro"):</p>
+        <ul>
+            <li><strong>Monthly:</strong> $3.99 USD per month</li>
+            <li><strong>Yearly:</strong> $29.99 USD per year</li>
+        </ul>
+        <p><strong>Payment:</strong> Payment is charged to your Apple ID account at confirmation of purchase. All payments are processed exclusively by Apple.</p>
+        <p><strong>Auto-Renewal:</strong> Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current billing period. Your account will be charged for renewal within 24 hours prior to the end of the current period at the same price.</p>
+        <p><strong>Managing Subscriptions:</strong> You can manage and cancel your subscription in your Apple ID Account Settings at any time. Cancellation takes effect at the end of the current billing period.</p>
+        <p><strong>Free Trial:</strong> If offered, any unused portion of a free trial is forfeited when you purchase a subscription.</p>
+        <p><strong>Refunds:</strong> All purchases are processed by Apple. To request a refund, visit <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a> or contact Apple Support. AppFactory Lab does not process refunds directly.</p>
+        <p><strong>Price Changes:</strong> We may change subscription prices at any time. Price changes take effect at the start of the next billing period. Your continued use after a price change constitutes acceptance of the new price. Apple will notify you of any price changes in advance.</p>
+
+        <h2>4. Free Tier</h2>
+        <p>The free version of Settla Bills supports up to 5 bills with full functionality including reminders and payment tracking. No account creation or personal information is required to use the free tier.</p>
+
+        <h2>5. User Responsibilities</h2>
+        <p>You are responsible for:</p>
+        <ul>
+            <li>Ensuring the accuracy of bill information you enter</li>
+            <li>Paying your actual bills on time (the App provides reminders only)</li>
+            <li>Maintaining the security of your device</li>
+            <li>Backing up your device if you wish to preserve your data</li>
+        </ul>
+
+        <h2>6. No Financial Advice</h2>
+        <p>Settla Bills is a utility tool for tracking bill due dates. It does not provide financial advice, tax advice, accounting services, or recommendations. The App is not a substitute for professional financial guidance. Any financial decisions you make are your sole responsibility.</p>
+
+        <h2>7. Disclaimer of Warranties</h2>
+        <p>The App is provided "as is" and "as available" without warranties of any kind, whether express, implied, or statutory, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+        <p>We do not warrant that:</p>
+        <ul>
+            <li>The App will be uninterrupted, timely, secure, or error-free</li>
+            <li>Reminders will always be delivered on time (notification delivery depends on your device settings and iOS system behavior)</li>
+            <li>The App will be compatible with all devices or OS versions</li>
+            <li>Any errors in the App will be corrected</li>
+        </ul>
+
+        <h2>8. Limitation of Liability</h2>
+        <p>To the maximum extent permitted by applicable law, AppFactory Lab shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
+        <ul>
+            <li>Late fees, penalties, or charges resulting from missed bill payments</li>
+            <li>Loss of data due to device failure, loss, or theft</li>
+            <li>Missed or delayed notifications</li>
+            <li>Any financial loss arising from use of the App</li>
+        </ul>
+        <p>Our total liability for any claim arising from or related to the App shall not exceed the amount you paid for the App in the 12 months preceding the claim, or $50 USD, whichever is less.</p>
+
+        <h2>9. Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless AppFactory Lab, its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from your use of the App or violation of these Terms.</p>
+
+        <h2>10. Data &amp; Privacy</h2>
+        <p>Your privacy is important to us. Please review our <a href="/privacy/settla-bills">Privacy Policy</a>, which describes how we handle your information. In summary: all data stays on your device, and we collect nothing.</p>
+
+        <h2>11. Intellectual Property</h2>
+        <p>The App, including its design, code, graphics, icons, and content, is owned by AppFactory Lab and protected by copyright, trademark, and other intellectual property laws. "Settla Bills" and "AppFactory Lab" are trademarks of AppFactory Lab.</p>
+
+        <h2>12. Termination</h2>
+        <p>We reserve the right to terminate or suspend your access to the App at any time, without notice, for conduct that we determine violates these Terms or is harmful to other users, us, or third parties. You may terminate your use of the App at any time by uninstalling it from your device.</p>
+
+        <h2>13. Changes to These Terms</h2>
+        <p>We may update these Terms from time to time. The updated version will be posted at this URL with a new effective date. Your continued use of the App after changes constitutes acceptance of the revised Terms. If changes are material, we will make reasonable efforts to notify you (e.g., via an in-app notice).</p>
+
+        <h2>14. Governing Law &amp; Jurisdiction</h2>
+        <p>These Terms are governed by the laws of the State of Israel, without regard to its conflict of law provisions. Any disputes arising from these Terms or the App shall be subject to the exclusive jurisdiction of the competent courts in Israel.</p>
+        <p>If you are an EU consumer, you retain any mandatory consumer protection rights under the laws of your country of residence. Nothing in these Terms affects your statutory rights as a consumer.</p>
+
+        <h2>15. Severability</h2>
+        <p>If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect. The invalid provision shall be modified to the minimum extent necessary to make it valid and enforceable.</p>
+
+        <h2>16. Entire Agreement</h2>
+        <p>These Terms, together with our <a href="/privacy/settla-bills">Privacy Policy</a> and Apple's Standard EULA, constitute the entire agreement between you and AppFactory Lab regarding the App.</p>
+
+        <h2>17. Apple-Specific Terms</h2>
+        <p>These Terms are between you and AppFactory Lab, not Apple. AppFactory Lab, not Apple, is solely responsible for the App and its content. Apple has no obligation to provide maintenance or support for the App. In the event of any failure of the App to conform to applicable warranties, you may notify Apple for a refund of the purchase price (if any); Apple has no other warranty obligation. Apple is not responsible for addressing any claims relating to the App. Apple is a third-party beneficiary of these Terms and may enforce them against you.</p>
+
+        <div class="contact-box">
+            <h2>Contact Us</h2>
+            <p>If you have questions about these Terms, contact us at:</p>
+            <p><a href="mailto:support@appfactorylab.io" class="contact-email">support@appfactorylab.io</a></p>
+            <p style="margin-top: 12px; font-size: 14px;">AppFactory Lab<br>Israel</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 <a href="/">AppFactory Lab</a> &middot; <a href="/privacy/settla-bills">Privacy Policy</a></p>
+    </footer>
+
+</body>
+</html>

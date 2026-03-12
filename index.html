@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AppFactory Lab — Apps built by AI. Shipped while you sleep.</title>
-    <meta name="description" content="An autonomous AI system that finds app ideas, builds them in SwiftUI, and ships them to the App Store. Zero human code.">
+    <title>AppFactory Lab — Modern iOS Apps</title>
+    <meta name="description" content="Clean, focused iOS apps for everyday life. Made with care by an independent developer.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,7 +14,6 @@
         :root {
             --bg: #08090a;
             --bg-raised: #111214;
-            --bg-card: #161819;
             --border: #222426;
             --text: #e8e8e8;
             --text-secondary: #7a7d82;
@@ -70,12 +69,6 @@
             height: 8px;
             background: var(--accent);
             border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--accent-glow); }
-            50% { opacity: 0.7; box-shadow: 0 0 0 6px transparent; }
         }
 
         .nav-links { display: flex; gap: 28px; }
@@ -90,106 +83,30 @@
 
         /* --- HERO --- */
         .hero {
-            min-height: 100vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 120px 32px 80px;
             max-width: 1080px;
             margin: 0 auto;
-            position: relative;
-        }
-
-        .hero-label {
-            font-family: var(--mono);
-            font-size: 13px;
-            color: var(--accent);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .hero-label::before {
-            content: '';
-            width: 32px;
-            height: 1px;
-            background: var(--accent);
         }
 
         .hero h1 {
-            font-size: clamp(48px, 8vw, 96px);
+            font-size: clamp(44px, 7vw, 80px);
             font-weight: 700;
-            line-height: 1.0;
+            line-height: 1.05;
             letter-spacing: -0.03em;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
         }
 
         .hero h1 .accent { color: var(--accent); }
 
         .hero-sub {
-            font-size: clamp(17px, 2.2vw, 21px);
+            font-size: clamp(17px, 2.2vw, 20px);
             color: var(--text-secondary);
-            max-width: 540px;
+            max-width: 480px;
             line-height: 1.7;
-            margin-bottom: 48px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 48px;
-            padding-top: 48px;
-            border-top: 1px solid var(--border);
-        }
-
-        .stat-item .stat-number {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text);
-        }
-
-        .stat-item .stat-label {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-
-        /* --- SECTION --- */
-        .section {
-            padding: 100px 32px;
-            max-width: 1080px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--text-secondary);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: clamp(28px, 4vw, 44px);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 20px;
-            line-height: 1.15;
-        }
-
-        .section-desc {
-            font-size: 17px;
-            color: var(--text-secondary);
-            max-width: 560px;
-            line-height: 1.7;
-            margin-bottom: 56px;
         }
 
         /* --- DIVIDER --- */
@@ -204,6 +121,30 @@
             background: var(--border);
         }
 
+        /* --- SECTION --- */
+        .section {
+            padding: 80px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 48px;
+            line-height: 1.15;
+        }
+
         /* --- APP CARD --- */
         .app-card {
             border: 1px solid var(--border);
@@ -211,8 +152,6 @@
             padding: 40px;
             background: var(--bg-raised);
             transition: border-color 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
         }
 
         .app-card:hover {
@@ -273,10 +212,7 @@
             max-width: 520px;
         }
 
-        .app-card-links {
-            display: flex;
-            gap: 20px;
-        }
+        .app-card-links { display: flex; gap: 20px; }
 
         .app-card-links a {
             font-size: 14px;
@@ -301,88 +237,61 @@
 
         .app-card-links a:hover::before { background: var(--accent); }
 
-        /* --- HOW IT WORKS --- */
-        .pipeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .pipeline-step {
-            background: var(--bg-raised);
-            padding: 32px 24px;
-            position: relative;
-        }
-
-        .pipeline-step .step-num {
-            font-family: var(--mono);
-            font-size: 11px;
-            color: var(--accent);
-            letter-spacing: 0.1em;
-            margin-bottom: 12px;
-        }
-
-        .pipeline-step h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .pipeline-step p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
         /* --- FOOTER --- */
         footer {
             padding: 48px 32px;
             max-width: 1080px;
             margin: 0 auto;
             border-top: 1px solid var(--border);
+        }
+
+        .footer-main {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 24px;
+            margin-bottom: 32px;
         }
 
-        .footer-left {
+        .footer-info p {
             font-size: 13px;
             color: var(--text-secondary);
+            margin-bottom: 4px;
         }
 
-        .footer-right {
+        .footer-links {
             display: flex;
             gap: 24px;
         }
 
-        .footer-right a {
+        .footer-links a {
             font-size: 13px;
             color: var(--text-secondary);
             transition: color 0.2s;
         }
-        .footer-right a:hover { color: var(--text); opacity: 1; }
+        .footer-links a:hover { color: var(--text); opacity: 1; }
+
+        .footer-legal {
+            font-size: 12px;
+            color: #555;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
 
         /* --- MOBILE --- */
         @media (max-width: 640px) {
             nav { padding: 16px 20px; }
             .nav-links { gap: 16px; }
-            .hero { padding: 100px 20px 60px; }
-            .hero-stats { flex-direction: column; gap: 24px; }
+            .hero { padding: 100px 20px 60px; min-height: 60vh; }
             .section { padding: 64px 20px; }
             .app-card { padding: 28px 20px; }
             .app-card-header { flex-direction: column; gap: 16px; }
-            footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
-            .pipeline { grid-template-columns: 1fr; }
+            footer { padding: 32px 20px; }
+            .footer-main { flex-direction: column; }
         }
 
-        /* --- ENTRANCE ANIMATIONS --- */
+        /* --- ANIMATIONS --- */
         .fade-up {
             opacity: 0;
             transform: translateY(24px);
@@ -403,42 +312,25 @@
         </div>
         <div class="nav-links">
             <a href="#apps">Apps</a>
-            <a href="#how">How it works</a>
             <a href="mailto:support@appfactorylab.io">Contact</a>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-label">Autonomous App Factory</div>
-        <h1 class="fade-up">Apps built by AI.<br><span class="accent">Shipped while<br>you sleep.</span></h1>
-        <p class="hero-sub fade-up">An autonomous system that discovers app ideas, writes production SwiftUI code, adds payments, and submits to the App Store. No human writes a single line.</p>
-        <div class="hero-stats fade-up">
-            <div class="stat-item">
-                <div class="stat-number">10</div>
-                <div class="stat-label">Pipeline Steps</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">4</div>
-                <div class="stat-label">AI Models</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">0</div>
-                <div class="stat-label">Lines Written by Humans</div>
-            </div>
-        </div>
+        <h1 class="fade-up">Clean, modern apps<br><span class="accent">that just work.</span></h1>
+        <p class="hero-sub fade-up">Simple iOS apps designed to solve one problem really well. No clutter, no bloat, no unnecessary features. Just what you need.</p>
     </section>
 
     <div class="divider"><hr></div>
 
     <section class="section" id="apps">
-        <div class="section-label">01 / Apps</div>
-        <h2 class="section-title fade-up">What we've shipped</h2>
-        <p class="section-desc fade-up">Each app is conceived, designed, coded, tested, and submitted by AI agents working in sequence. Here's what's live.</p>
+        <div class="section-label">Apps</div>
+        <h2 class="section-title fade-up">On the App Store</h2>
 
         <div class="app-card fade-up">
             <div class="app-card-header">
                 <div class="app-icon-placeholder">$</div>
-                <span class="app-badge">Live on App Store</span>
+                <span class="app-badge">Available Now</span>
             </div>
             <h3>Settla Bills</h3>
             <p class="app-tagline">Never pay a late fee again</p>
@@ -446,63 +338,33 @@
             <div class="app-card-links">
                 <a href="/support/settla-bills">Support & FAQ</a>
                 <a href="/privacy/settla-bills">Privacy Policy</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"><hr></div>
-
-    <section class="section" id="how">
-        <div class="section-label">02 / Process</div>
-        <h2 class="section-title fade-up">How it works</h2>
-        <p class="section-desc fade-up">A 10-step pipeline runs autonomously. Each step is handled by a specialized AI agent. The orchestrator checks every 5 minutes and routes work.</p>
-
-        <div class="pipeline fade-up">
-            <div class="pipeline-step">
-                <div class="step-num">01</div>
-                <h4>Research</h4>
-                <p>Scans Reddit, reviews, and App Store gaps for real pain points.</p>
-            </div>
-            <div class="pipeline-step">
-                <div class="step-num">02</div>
-                <h4>Validate</h4>
-                <p>Scores ideas across market size, buildability, and monetization.</p>
-            </div>
-            <div class="pipeline-step">
-                <div class="step-num">03</div>
-                <h4>Build</h4>
-                <p>Writes the full SwiftUI app from a generated PRD. Zero TODOs.</p>
-            </div>
-            <div class="pipeline-step">
-                <div class="step-num">04</div>
-                <h4>Review & QA</h4>
-                <p>A different AI model audits the code. Automated UI tests run on simulator.</p>
-            </div>
-            <div class="pipeline-step">
-                <div class="step-num">05</div>
-                <h4>Ship</h4>
-                <p>Icons, screenshots, listing, and submission. Fully automated.</p>
+                <a href="/terms/settla-bills">Terms of Use</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-left">&copy; 2026 AppFactory Lab</div>
-        <div class="footer-right">
-            <a href="mailto:support@appfactorylab.io">support@appfactorylab.io</a>
-            <a href="/privacy/settla-bills">Privacy</a>
+        <div class="footer-main">
+            <div class="footer-info">
+                <p>&copy; 2026 AppFactory Lab</p>
+                <p><a href="mailto:support@appfactorylab.io">support@appfactorylab.io</a></p>
+            </div>
+            <div class="footer-links">
+                <a href="/site-privacy">Privacy Policy</a>
+                <a href="/site-terms">Terms of Use</a>
+            </div>
+        </div>
+        <div class="footer-legal">
+            AppFactory Lab is an independent developer based in Israel. Apple, the Apple logo, iPhone, and App Store are trademarks of Apple Inc.
         </div>
     </footer>
 
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     </script>
 </body>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Privacy Policy | AppFactory Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #08090a; --bg-raised: #111214; --border: #222426;
+            --text: #e8e8e8; --text-secondary: #7a7d82;
+            --accent: #00ff88; --accent-dim: rgba(0,255,136,0.08);
+            --font: 'Space Grotesk', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+        body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+        header { padding: 20px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .header-logo { font-weight: 700; font-size: 15px; color: var(--text); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .header-logo:hover { opacity: 1; }
+        .header-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+        .header-back { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+        .header-back:hover { color: var(--text); opacity: 1; }
+        .content { max-width: 680px; margin: 0 auto; padding: 64px 32px 100px; }
+        .page-label { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .page-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+        h1 { font-size: clamp(28px,5vw,40px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.15; }
+        .effective-date { font-family: var(--mono); font-size: 13px; color: var(--text-secondary); margin-bottom: 48px; }
+        h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-top: 48px; margin-bottom: 16px; padding-top: 32px; border-top: 1px solid var(--border); }
+        h2:first-of-type { border-top: none; padding-top: 0; }
+        p { font-size: 16px; color: var(--text-secondary); margin-bottom: 16px; }
+        ul { padding-left: 0; list-style: none; margin-bottom: 16px; }
+        li { font-size: 15px; color: var(--text-secondary); padding: 8px 0 8px 20px; position: relative; border-bottom: 1px solid rgba(34,36,38,0.5); }
+        li:last-child { border-bottom: none; }
+        li::before { content: ''; position: absolute; left: 0; top: 16px; width: 6px; height: 6px; border-radius: 50%; background: var(--text-secondary); }
+        .contact-box { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-top: 48px; }
+        .contact-box h2 { border: none; padding-top: 0; margin-top: 0; margin-bottom: 12px; font-size: 18px; }
+        .contact-box p { margin-bottom: 8px; }
+        footer { max-width: 680px; margin: 0 auto; padding: 32px 32px 48px; border-top: 1px solid var(--border); text-align: center; }
+        footer p { font-size: 13px; color: var(--text-secondary); }
+        @media (max-width: 640px) { header { padding: 16px 20px; } .content { padding: 40px 20px 80px; } footer { padding: 24px 20px 40px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="header-logo"><span class="header-dot"></span> AppFactory Lab</a>
+    <a href="/" class="header-back">Back to home</a>
+</header>
+
+<div class="content">
+    <div class="page-label">Website Privacy Policy</div>
+    <h1>appfactorylab.io</h1>
+    <p class="effective-date">Effective date: March 12, 2026</p>
+
+    <p>This privacy policy applies to the website appfactorylab.io ("the Website"), operated by Musa, an independent developer based in Israel, doing business as AppFactory Lab ("I", "me", "my").</p>
+
+    <p>This policy covers only the Website itself. Each app has its own privacy policy, accessible from the app's page on this Website.</p>
+
+    <h2>Information I Collect</h2>
+
+    <p><strong>Contact form submissions:</strong> If you use the contact form on a support page, I receive your name, email address, topic selection, and message. This data is processed by Formspree, Inc. (a third-party form handler) and forwarded to me via email. I use this information solely to respond to your inquiry.</p>
+
+    <p><strong>I do NOT collect:</strong></p>
+    <ul>
+        <li>No cookies (the Website uses zero cookies)</li>
+        <li>No analytics or tracking scripts (no Google Analytics, no Meta Pixel, nothing)</li>
+        <li>No device fingerprinting</li>
+        <li>No advertising identifiers</li>
+        <li>No account registration or login</li>
+        <li>No automatically collected personal data</li>
+    </ul>
+
+    <h2>Third-Party Services</h2>
+    <p>The Website uses the following third-party services:</p>
+    <ul>
+        <li><strong>Vercel</strong> (hosting) — may collect standard server logs (IP address, timestamp, page requested) as part of their infrastructure. See <a href="https://vercel.com/legal/privacy-policy">Vercel's Privacy Policy</a>.</li>
+        <li><strong>Google Fonts</strong> — fonts are loaded from Google's servers. See <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>.</li>
+        <li><strong>Formspree</strong> (contact forms) — processes form submissions. See <a href="https://formspree.io/legal/privacy-policy">Formspree's Privacy Policy</a>.</li>
+    </ul>
+    <p>I do not sell, share, or trade any personal information with third parties for marketing or advertising purposes.</p>
+
+    <h2>Legal Basis for Processing (GDPR)</h2>
+    <p>For users in the EU/EEA, the legal basis for processing contact form data is your consent (Article 6(1)(a) GDPR) — you voluntarily choose to submit the form. For server logs collected by Vercel, the legal basis is legitimate interest (Article 6(1)(f) GDPR) — maintaining website security and availability.</p>
+
+    <h2>Your Rights Under GDPR (EU/EEA Users)</h2>
+    <p>If you are in the EU/EEA, you have the right to:</p>
+    <ul>
+        <li>Access any personal data I hold about you</li>
+        <li>Request correction or deletion of your data</li>
+        <li>Withdraw consent for contact form processing</li>
+        <li>Lodge a complaint with your local Data Protection Authority</li>
+    </ul>
+    <p>To exercise these rights, email me at <a href="mailto:support@appfactorylab.io">support@appfactorylab.io</a>.</p>
+
+    <h2>Your Rights Under CCPA (California Users)</h2>
+    <p>If you are a California resident:</p>
+    <ul>
+        <li>I do not sell personal information</li>
+        <li>You have the right to know what data I collect (see above — only contact form submissions)</li>
+        <li>You have the right to request deletion of your data</li>
+        <li>I do not discriminate against users who exercise their privacy rights</li>
+    </ul>
+
+    <h2>Israeli Privacy Protection Law</h2>
+    <p>I am based in Israel and comply with the Israeli Privacy Protection Law, 5741-1981 (PPL). The Website does not maintain a database of personal information requiring registration with the Israeli Privacy Protection Authority (PPA). Contact form submissions are stored only in my email inbox and are not organized as a searchable database.</p>
+    <p>Israeli users have the right to access, correct, and request deletion of any personal data. Contact me at <a href="mailto:support@appfactorylab.io">support@appfactorylab.io</a>.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>The Website is not directed at children under 13 (or under 16 in the EU/EEA). I do not knowingly collect personal information from children. If you believe a child has submitted information through the contact form, please contact me and I will delete it.</p>
+
+    <h2>Data Retention</h2>
+    <p>Contact form submissions are retained in my email for as long as needed to resolve your inquiry, then deleted. I do not maintain a separate database of inquiries. Vercel server logs are retained according to Vercel's data retention policies.</p>
+
+    <h2>Data Security</h2>
+    <p>The Website is served over HTTPS. Contact form submissions are transmitted securely via Formspree's encrypted infrastructure. I take reasonable measures to protect any personal data I receive.</p>
+
+    <h2>International Data Transfers</h2>
+    <p>Contact form data may be processed by Formspree (based in the United States) and hosted by Vercel (infrastructure in multiple countries). These services maintain appropriate data protection measures. By submitting a contact form, you acknowledge this transfer.</p>
+
+    <h2>Do Not Track</h2>
+    <p>The Website does not track users and therefore honors Do Not Track signals by default.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>If this policy is updated, the revised version will be posted at this URL with a new effective date.</p>
+
+    <h2>Governing Law</h2>
+    <p>This privacy policy is governed by the laws of the State of Israel. Any disputes shall be subject to the exclusive jurisdiction of the competent courts in Israel.</p>
+
+    <div class="contact-box">
+        <h2>Contact</h2>
+        <p>For questions about this privacy policy:</p>
+        <p><a href="mailto:support@appfactorylab.io" style="font-family: var(--mono); font-size: 15px;">support@appfactorylab.io</a></p>
+        <p style="margin-top: 12px; font-size: 14px;">AppFactory Lab<br>Israel</p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 <a href="/">AppFactory Lab</a> &middot; <a href="/site-terms">Terms of Use</a></p>
+</footer>
+
+</body>
+</html>

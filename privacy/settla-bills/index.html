@@ -3,87 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settla Bills — Privacy Policy</title>
+    <title>Settla Bills — Privacy Policy | AppFactory Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #08090a;
+            --bg-raised: #111214;
+            --border: #222426;
+            --text: #e8e8e8;
+            --text-secondary: #7a7d82;
+            --accent: #00ff88;
+            --accent-dim: rgba(0, 255, 136, 0.08);
+            --font: 'Space Grotesk', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .header-logo:hover { opacity: 1; }
+
+        .header-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .header-back {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .header-back:hover { color: var(--text); opacity: 1; }
+
+        /* --- CONTENT --- */
+        .content {
             max-width: 680px;
             margin: 0 auto;
-            padding: 24px 16px;
-            color: #1c1c1e;
-            line-height: 1.6;
+            padding: 64px 32px 100px;
         }
-        h1 { font-size: 24px; margin-bottom: 4px; }
-        h2 { font-size: 18px; margin-top: 32px; }
-        .date { color: #8e8e93; font-size: 14px; margin-bottom: 24px; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        .contact { background: #f2f2f7; padding: 16px; border-radius: 12px; margin-top: 24px; }
+
+        .page-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            line-height: 1.15;
+        }
+
+        .effective-date {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+        }
+
+        .summary-box {
+            background: var(--accent-dim);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 48px;
+        }
+
+        .summary-box p {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .summary-box strong { color: var(--accent); }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        h2:first-of-type { border-top: none; padding-top: 0; }
+
+        p { font-size: 16px; color: var(--text-secondary); margin-bottom: 16px; }
+
+        ul { padding-left: 0; list-style: none; margin-bottom: 16px; }
+
+        li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            padding: 8px 0 8px 20px;
+            position: relative;
+            border-bottom: 1px solid rgba(34, 36, 38, 0.5);
+        }
+
+        li:last-child { border-bottom: none; }
+
+        li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+        }
+
+        /* --- CONTACT BOX --- */
+        .contact-box {
+            background: var(--bg-raised);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-top: 48px;
+        }
+
+        .contact-box h2 {
+            border: none;
+            padding-top: 0;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .contact-box p { margin-bottom: 8px; }
+
+        .contact-email {
+            font-family: var(--mono);
+            font-size: 15px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 32px 32px 48px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 640px) {
+            header { padding: 16px 20px; }
+            .content { padding: 40px 20px 80px; }
+            footer { padding: 24px 20px 40px; }
+        }
     </style>
 </head>
 <body>
-    <h1>Privacy Policy</h1>
-    <p class="date">Effective date: March 11, 2026</p>
 
-    <p>Settla Bills ("the App") is developed by App Factory. This privacy policy explains what data the App collects, how it is stored, and your rights regarding that data.</p>
+    <header>
+        <a href="/" class="header-logo">
+            <span class="header-dot"></span>
+            AppFactory Lab
+        </a>
+        <a href="/" class="header-back">Back to home</a>
+    </header>
 
-    <h2>Summary</h2>
-    <p><strong>Settla Bills does not collect, transmit, or share any personal data.</strong> All information you enter into the App stays on your device. There is no server, no cloud sync, no analytics, and no tracking.</p>
+    <div class="content">
+        <div class="page-label">Privacy Policy</div>
+        <h1>Settla Bills</h1>
+        <p class="effective-date">Effective date: March 11, 2026</p>
 
-    <h2>Data You Enter</h2>
-    <p>When you use Settla Bills, you may enter the following information:</p>
-    <ul>
-        <li>Bill names (e.g., "Rent", "Netflix")</li>
-        <li>Bill amounts</li>
-        <li>Due dates and recurrence schedules</li>
-        <li>Reminder preferences</li>
-        <li>Optional notes</li>
-    </ul>
-    <p>This data is stored locally on your device using Apple's SwiftData framework. It is <strong>never transmitted</strong> to any server, cloud service, or third party.</p>
+        <div class="summary-box">
+            <p><strong>Settla Bills does not collect, transmit, or share any personal data.</strong> All information you enter stays on your device. No server, no cloud sync, no analytics, no tracking.</p>
+        </div>
 
-    <h2>Data We Do NOT Collect</h2>
-    <ul>
-        <li>No bank account information</li>
-        <li>No credit card numbers</li>
-        <li>No payment processing (bills are tracked, not paid, through the App)</li>
-        <li>No location data</li>
-        <li>No contacts or address book access</li>
-        <li>No advertising identifiers</li>
-        <li>No analytics or usage tracking</li>
-        <li>No crash reporting data</li>
-    </ul>
+        <p>Settla Bills ("the App") is developed by AppFactory Lab. This privacy policy explains what data the App collects, how it is stored, and your rights regarding that data.</p>
 
-    <h2>Push Notifications</h2>
-    <p>Settla Bills uses Apple's local notification system to remind you before bills are due. These notifications are scheduled entirely on your device. No notification data is sent to any server. You can disable notifications at any time in your iPhone's Settings app.</p>
+        <h2>Data You Enter</h2>
+        <p>When you use Settla Bills, you may enter:</p>
+        <ul>
+            <li>Bill names (e.g., "Rent", "Netflix")</li>
+            <li>Bill amounts</li>
+            <li>Due dates and recurrence schedules</li>
+            <li>Reminder preferences</li>
+            <li>Optional notes</li>
+        </ul>
+        <p>This data is stored locally on your device using Apple's SwiftData framework. It is <strong>never transmitted</strong> to any server, cloud service, or third party.</p>
 
-    <h2>In-App Purchases</h2>
-    <p>Settla Bills offers optional subscription plans (Settla Bills Pro) through Apple's App Store. All payment processing is handled entirely by Apple. App Factory does not receive, store, or have access to your payment information. For details on how Apple handles purchase data, refer to <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a>.</p>
+        <h2>Data We Do NOT Collect</h2>
+        <ul>
+            <li>No bank account information</li>
+            <li>No credit card numbers</li>
+            <li>No payment processing (bills are tracked, not paid)</li>
+            <li>No location data</li>
+            <li>No contacts or address book access</li>
+            <li>No advertising identifiers</li>
+            <li>No analytics or usage tracking</li>
+            <li>No crash reporting data</li>
+        </ul>
 
-    <h2>Third-Party Services</h2>
-    <p>Settla Bills does not integrate with any third-party services, SDKs, analytics platforms, or advertising networks. The App communicates only with Apple's StoreKit framework for in-app purchase functionality.</p>
+        <h2>Push Notifications</h2>
+        <p>Settla Bills uses Apple's local notification system to remind you before bills are due. Notifications are scheduled entirely on your device. No notification data is sent to any server. You can disable them in Settings &gt; Settla Bills &gt; Notifications.</p>
 
-    <h2>Data Deletion</h2>
-    <p>Since all data is stored locally on your device, you have full control over it at all times:</p>
-    <ul>
-        <li>Delete individual bills by swiping left in the App</li>
-        <li>Delete all data by uninstalling the App from your device</li>
-    </ul>
-    <p>No data persists on any external server after deletion.</p>
+        <h2>In-App Purchases</h2>
+        <p>Settla Bills offers optional subscriptions (Settla Bills Pro) through Apple's App Store. All payment processing is handled by Apple. AppFactory Lab does not receive, store, or access your payment information. See <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a> for details.</p>
 
-    <h2>Children's Privacy</h2>
-    <p>Settla Bills does not knowingly collect any data from children under 13. The App does not collect data from any user of any age.</p>
+        <h2>Third-Party Services</h2>
+        <p>Settla Bills does not integrate with any third-party services, SDKs, analytics platforms, or advertising networks. The App communicates only with Apple's StoreKit framework for purchases.</p>
 
-    <h2>Changes to This Policy</h2>
-    <p>If this privacy policy is updated, the revised version will be posted at this URL with an updated effective date. Since the App collects no data, significant changes are unlikely.</p>
+        <h2>Data Deletion</h2>
+        <p>All data is stored locally. You have full control:</p>
+        <ul>
+            <li>Delete individual bills by swiping left</li>
+            <li>Delete all data by uninstalling the app</li>
+        </ul>
+        <p>No data persists on any external server after deletion.</p>
 
-    <div class="contact">
-        <h2 style="margin-top: 0;">Contact</h2>
-        <p>If you have questions about this privacy policy, contact us at:</p>
-        <p><a href="mailto:support@appfactorylab.io">support@appfactorylab.io</a></p>
+        <h2>Children's Privacy</h2>
+        <p>Settla Bills does not collect data from any user of any age, including children under 13.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>If updated, the revised policy will be posted at this URL with a new effective date. Since the App collects no data, significant changes are unlikely.</p>
+
+        <div class="contact-box">
+            <h2>Questions?</h2>
+            <p>Contact us about this privacy policy:</p>
+            <p><a href="mailto:support@appfactorylab.io" class="contact-email">support@appfactorylab.io</a></p>
+        </div>
     </div>
 
-    <div style="margin-top: 48px; padding-top: 16px; border-top: 1px solid #e5e5ea; color: #8e8e93; font-size: 13px; text-align: center;">
-        <p>&copy; 2026 <a href="https://appfactorylab.io" style="color: #007aff; text-decoration: none;">appfactorylab.io</a></p>
-    </div>
+    <footer>
+        <p>&copy; 2026 <a href="/">AppFactory Lab</a></p>
+    </footer>
+
 </body>
 </html>

@@ -3,65 +3,469 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settla Bills — Support</title>
+    <title>Settla Bills — Support | AppFactory Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #08090a;
+            --bg-raised: #111214;
+            --bg-card: #161819;
+            --border: #222426;
+            --text: #e8e8e8;
+            --text-secondary: #7a7d82;
+            --accent: #00ff88;
+            --accent-dim: rgba(0, 255, 136, 0.08);
+            --font: 'Space Grotesk', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .header-logo:hover { opacity: 1; }
+
+        .header-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .header-back {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .header-back:hover { color: var(--text); opacity: 1; }
+
+        /* --- CONTENT --- */
+        .content {
             max-width: 680px;
             margin: 0 auto;
-            padding: 24px 16px;
-            color: #1c1c1e;
-            line-height: 1.6;
+            padding: 64px 32px 100px;
         }
-        h1 { font-size: 24px; margin-bottom: 4px; }
-        h2 { font-size: 18px; margin-top: 32px; }
-        .subtitle { color: #8e8e93; font-size: 14px; margin-bottom: 24px; }
-        .faq-item { margin-bottom: 24px; }
-        .faq-item h3 { font-size: 16px; margin-bottom: 4px; }
-        .faq-item p { color: #3a3a3c; }
-        .contact { background: #f2f2f7; padding: 16px; border-radius: 12px; margin-top: 24px; }
-        .footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid #e5e5ea; color: #8e8e93; font-size: 13px; text-align: center; }
-        a { color: #007aff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+
+        .page-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            line-height: 1.15;
+        }
+
+        .page-subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+        }
+
+        p { font-size: 16px; color: var(--text-secondary); margin-bottom: 16px; }
+
+        /* --- FAQ --- */
+        .faq-section-title {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--text-secondary);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+            padding: 20px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover { color: var(--accent); }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: border-color 0.2s, transform 0.3s;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer-inner {
+            padding: 0 0 24px 0;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* --- CONTACT FORM --- */
+        .contact-section {
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+
+        .contact-section .contact-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group.full-width { grid-column: 1 / -1; }
+
+        label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+
+        input, textarea, select {
+            background: var(--bg-raised);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+            width: 100%;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-dim);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #444;
+        }
+
+        textarea { resize: vertical; min-height: 120px; }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a7d82' d='M1.4 0L6 4.6 10.6 0 12 1.4l-6 6-6-6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        select option { background: var(--bg-raised); color: var(--text); }
+
+        .submit-btn {
+            background: var(--accent);
+            color: #08090a;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 32px;
+            font-family: var(--font);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover { opacity: 0.9; }
+        .submit-btn:active { transform: scale(0.98); }
+
+        .form-note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 12px;
+        }
+
+        .form-note a { font-size: 13px; }
+
+        .email-alt {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--bg-raised);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .email-alt p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .email-alt a {
+            font-family: var(--mono);
+            font-size: 15px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 32px 32px 48px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        footer p, footer a {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a:hover { color: var(--text); opacity: 1; }
+
+        @media (max-width: 640px) {
+            header { padding: 16px 20px; }
+            .content { padding: 40px 20px 80px; }
+            .form-grid { grid-template-columns: 1fr; }
+            footer {
+                padding: 24px 20px 40px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Settla Bills — Support</h1>
-    <p class="subtitle">Bill Due Date Tracker for iOS</p>
 
-    <p>Need help with Settla Bills? Check the frequently asked questions below, or reach out to us directly.</p>
+    <header>
+        <a href="/" class="header-logo">
+            <span class="header-dot"></span>
+            AppFactory Lab
+        </a>
+        <a href="/" class="header-back">Back to home</a>
+    </header>
 
-    <h2>Frequently Asked Questions</h2>
+    <div class="content">
+        <div class="page-label">Support</div>
+        <h1>Settla Bills</h1>
+        <p class="page-subtitle">Bill Due Date Tracker for iOS</p>
 
-    <div class="faq-item">
-        <h3>How do I add a recurring bill?</h3>
-        <p>Tap the + button on the Dashboard, enter the bill name, amount, and due date, then choose a recurrence (monthly, quarterly, or yearly). Settla Bills will automatically reset the due date after you mark each payment as paid.</p>
+        <!-- FAQ -->
+        <div class="faq-section-title">Frequently Asked Questions</div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I add a recurring bill?
+                <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">Tap the + button on the Dashboard, enter the bill name, amount, and due date, then choose a recurrence (monthly, quarterly, or yearly). Settla Bills automatically resets the due date after you mark each payment as paid.</div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I set up reminders?
+                <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">When adding or editing a bill, choose how early you want to be reminded — 1 day, 2 days, or 1 week before the due date. Settla Bills uses local notifications on your device. Make sure notifications are enabled in your iPhone's Settings > Settla Bills > Notifications.</div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                What happens to my data if I delete the app?
+                <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">All your bill data is stored locally on your device. If you delete Settla Bills, your data is permanently removed. There is no cloud backup or server sync. We recommend marking all bills as paid before uninstalling if you want a record.</div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I upgrade to Settla Bills Pro?
+                <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">The free version supports up to 5 bills. To track unlimited bills, tap the upgrade banner on the Dashboard or go to Settings > Upgrade. Plans are $3.99/month or $29.99/year. You can cancel anytime through your Apple ID subscription settings.</div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Can I export my bill history?
+                <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-inner">CSV export is available with Settla Bills Pro. Go to Settings > Export Data to download a spreadsheet of all your bills and payment history. The file can be opened in Excel, Google Sheets, or any spreadsheet app.</div>
+            </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="contact-section">
+            <h2>Get in touch</h2>
+            <p class="contact-desc">Can't find what you're looking for? Send us a message and we'll get back to you within 24 hours.</p>
+
+            <form action="https://formspree.io/f/FORMID" method="POST">
+                <input type="hidden" name="_subject" value="Settla Bills Support Request">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="topic">Topic</label>
+                        <select id="topic" name="topic" required>
+                            <option value="" disabled selected>Select a topic</option>
+                            <option value="billing">Billing & Subscriptions</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="account">Account & Data</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Describe your issue or question..." required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+                <p class="form-note">By submitting, you agree to our <a href="/privacy/settla-bills">Privacy Policy</a>.</p>
+            </form>
+
+            <div class="email-alt">
+                <p>Prefer email?</p>
+                <a href="mailto:support@appfactorylab.io">support@appfactorylab.io</a>
+            </div>
+        </div>
     </div>
 
-    <div class="faq-item">
-        <h3>How do I set up reminders?</h3>
-        <p>When adding or editing a bill, choose how early you want to be reminded — 1 day, 2 days, or 1 week before the due date. Settla Bills uses local notifications on your device. Make sure notifications are enabled in your iPhone's Settings &gt; Settla Bills &gt; Notifications.</p>
-    </div>
+    <footer>
+        <p>&copy; 2026 AppFactory Lab</p>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/privacy/settla-bills">Privacy</a>
+            <a href="mailto:support@appfactorylab.io">Email</a>
+        </div>
+    </footer>
 
-    <div class="faq-item">
-        <h3>What happens to my data if I delete the app?</h3>
-        <p>All your bill data is stored locally on your device. If you delete Settla Bills, your data is permanently removed. There is no cloud backup or server sync. We recommend marking all bills as paid before uninstalling if you want a record.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3>How do I upgrade to Settla Bills Pro?</h3>
-        <p>The free version supports up to 5 bills. To track unlimited bills, tap the upgrade banner on the Dashboard or go to Settings &gt; Upgrade. Plans are $3.99/month or $29.99/year. You can cancel anytime through your Apple ID subscription settings.</p>
-    </div>
-
-    <div class="contact">
-        <h2 style="margin-top: 0;">Still need help?</h2>
-        <p>If your question isn't answered above, contact us directly. We typically respond within 24 hours.</p>
-        <p><a href="mailto:support@appfactorylab.io">support@appfactorylab.io</a></p>
-    </div>
-
-    <div class="footer">
-        <p>&copy; 2026 <a href="https://appfactorylab.io">appfactorylab.io</a></p>
-        <p><a href="https://appfactorylab.io/privacy/settla-bills">Privacy Policy</a></p>
-    </div>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+    </script>
 </body>
 </html>
